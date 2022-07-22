@@ -23,6 +23,7 @@ func main() {
 			NewV50(),
 			NewKafkaCommand(),
 			NewMySQLCommand(),
+			NewRedisCommand(),
 		},
 	}
 
