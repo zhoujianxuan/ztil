@@ -4,9 +4,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/urfave/cli/v2"
-
 	"github.com/Shopify/sarama"
+	"github.com/urfave/cli/v2"
 )
 
 func NewKafkaCommand() *cli.Command {

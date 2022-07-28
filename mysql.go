@@ -8,9 +8,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/urfave/cli/v2"
-
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/urfave/cli/v2"
 )
 
 func getMysqlConnection(user, pass, url, database string) (*sql.DB, error) {
@@ -112,11 +111,22 @@ func NewMySQLCommand() *cli.Command {
 			}
 			defer f.Close()
 
-			_, _ = f.WriteString("\xEF\xBB\xBF")
+			_, err = f.WriteString("\xEF\xBB\xBF")
+			if err != nil {
+				return err
+			}
+
 			writer := csv.NewWriter(f)
-			_ = writer.Write(cols)
+			err = writer.Write(cols)
+			if err != nil {
+				return err
+			}
+
 			for _, data := range list {
-				_ = writer.Write(data)
+				err = writer.Write(data)
+				if err != nil {
+					return err
+				}
 			}
 			writer.Flush()
 			return nil
