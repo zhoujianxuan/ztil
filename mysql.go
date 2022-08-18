@@ -42,8 +42,8 @@ func RAW(user, pass, url, database, sqlStr string) ([][]string, []string, error)
 		scans[i] = &values[i]
 	}
 
-	index := 0
-	result := make(map[int]*DatabaseResult)
+	//result := make(map[int]*DatabaseResult)
+	var result []*DatabaseResult
 	for rows.Next() {
 		err = rows.Scan(scans...)
 		if err != nil {
@@ -61,11 +61,10 @@ func RAW(user, pass, url, database, sqlStr string) ([][]string, []string, error)
 			j++
 		}
 
-		result[index] = &DatabaseResult{
+		result = append(result, &DatabaseResult{
 			Tp:    tp,
 			Value: row,
-		}
-		index++
+		})
 	}
 
 	var data [][]string
@@ -87,7 +86,7 @@ func NewMySQLCommand() *cli.Command {
 		Name:      "mysql",
 		Aliases:   []string{"sql"},
 		Usage:     "select sql",
-		UsageText: "mysql <user> <password> <url> <database> <sql>",
+		UsageText: "mysql <user> <password> <url> <database> <sql> [-e]",
 		Action: func(c *cli.Context) error {
 			if c.NArg() < 5 {
 				fmt.Println("Periodic incomplete")
@@ -100,9 +99,28 @@ func NewMySQLCommand() *cli.Command {
 			database := c.Args().Get(3)
 			sqlStr := c.Args().Get(4)
 
+			var exhibit bool
+			if c.NArg() == 6 {
+				exhibit = true
+			}
+
 			list, cols, err := RAW(user, pass, url, database, sqlStr)
 			if err != nil {
 				return err
+			}
+
+			if exhibit {
+				for _, col := range cols {
+					fmt.Print(col, " ")
+				}
+				fmt.Println()
+				for _, row := range list {
+					for _, r := range row {
+						fmt.Print(r, " ")
+					}
+					fmt.Println()
+				}
+				return nil
 			}
 
 			f, err := os.Create(fmt.Sprintf("%d%s", time.Now().UnixNano(), ".csv"))

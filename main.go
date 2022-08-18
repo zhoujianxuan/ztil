@@ -24,6 +24,7 @@ func main() {
 			NewKafkaCommand(),
 			NewMySQLCommand(),
 			NewRedisCommand(),
+			NewCrc32(),
 		},
 	}
 
