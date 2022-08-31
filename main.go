@@ -22,6 +22,7 @@ func main() {
 		Commands: []*cli.Command{
 			NewV50(),
 			NewKafkaCommand(),
+			NewKafkaConsumerCommand(),
 			NewMySQLCommand(),
 			NewRedisCommand(),
 			NewCrc32(),

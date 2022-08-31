@@ -27,6 +27,7 @@ require (
 	github.com/klauspost/compress v1.15.6 // indirect
 	github.com/onsi/ginkgo v1.16.5 // indirect
 	github.com/onsi/gomega v1.20.0 // indirect
+	github.com/panjf2000/ants/v2 v2.5.0 // indirect
 	github.com/pierrec/lz4/v4 v4.1.14 // indirect
 	github.com/rcrowley/go-metrics v0.0.0-20201227073835-cf1acfcdf475 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
