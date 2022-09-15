@@ -25,5 +25,5 @@ COMMANDS:
 Send kafka message
 ```
 USAGE:
-ks <topic> <value> [url]
+ks <topic> <value> <times> [url]
 ```
