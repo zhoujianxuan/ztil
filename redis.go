@@ -42,19 +42,25 @@ func NewRedisCommand() *cli.Command {
 				pass = c.Args().Get(4)
 			}
 
-			var r string
-			client := getRedisClient(addr, pass, db)
-			switch operate {
-			case "Get":
-				r, err = client.Get(key).Result()
-				if err != nil {
-					return err
-				}
-			default:
-				fmt.Println("当前不支持该操作类型")
-			}
+			r := RedisGet(addr, pass, key, operate, db)
 			fmt.Println(r)
 			return nil
 		},
+	}
+}
+
+const Get = "Get"
+
+func RedisGet(addr, pass, key, operate string, db int) string {
+	client := getRedisClient(addr, pass, db)
+	switch operate {
+	case Get:
+		r, err := client.Get(key).Result()
+		if err != nil {
+			panic(err)
+		}
+		return r
+	default:
+		return "当前不支持该操作类型"
 	}
 }
