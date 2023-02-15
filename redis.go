@@ -57,6 +57,9 @@ func RedisGet(addr, pass, key, operate string, db int) string {
 	case Get:
 		r, err := client.Get(key).Result()
 		if err != nil {
+			if err.Error() == "redis: nil" {
+				return r
+			}
 			panic(err)
 		}
 		return r

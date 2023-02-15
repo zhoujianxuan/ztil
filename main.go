@@ -26,6 +26,7 @@ func main() {
 			NewMySQLCommand(),
 			NewRedisCommand(),
 			NewCrc32(),
+			NewWXRobot(),
 		},
 	}
 
