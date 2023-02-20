@@ -1,14 +1,25 @@
 # ztil
-工具，方便平时用于调试
 
-```
+Command-line tools for easy use at work
+
+```text
+
 go install ./
 
 ztil -h
+
 ```
 
-## 功能
-```
+## Function
+
+```text
+
+NAME:
+   ztil.exe - A new cli application
+
+USAGE:
+   ztil.exe [global options] command [command options] [arguments...]
+
 COMMANDS:
    crc32, crc         crc32 <key>
    kafka_receive, kr  receive kafka message
@@ -16,14 +27,10 @@ COMMANDS:
    mysql, sql         select sql
    redis, r           redis
    v50
+   wx robot, wr       wr
    help, h            Shows a list of commands or help for one command
-```
-- ks kafka 生产者
-- kr kafka 消费者
 
-### kafka_send, ks
-Send kafka message
-```
-USAGE:
-ks <topic> <value> <times> [url]
+GLOBAL OPTIONS:
+   --help, -h  show help (default: false)
+
 ```

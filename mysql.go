@@ -38,7 +38,7 @@ func RAW(user, pass, url, database, sqlStr string) ([][]string, []string, error)
 
 	values := make([][]byte, len(cols))
 	scans := make([]interface{}, len(cols))
-	for i, _ := range cols {
+	for i := range cols {
 		scans[i] = &values[i]
 	}
 
@@ -55,7 +55,7 @@ func RAW(user, pass, url, database, sqlStr string) ([][]string, []string, error)
 		j := 0
 		for k, v := range values {
 			key := cols[k]
-			//这里把[]byte根据条件转换
+			//Here [] byte is converted according to conditions.
 			row[key] = v
 			tp[key] = types[j].DatabaseTypeName()
 			j++

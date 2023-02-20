@@ -64,6 +64,6 @@ func RedisGet(addr, pass, key, operate string, db int) string {
 		}
 		return r
 	default:
-		return "当前不支持该操作类型"
+		return "This operation type is not currently supported"
 	}
 }
