@@ -19,7 +19,7 @@ jobs:
           release_name: gocapture ${{ github.ref }}
           draft: false
           prerelease: false
-          
+
   linuxbuild:
     name: build gocapture
     needs: release
@@ -31,7 +31,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v2
         with:
-          go-version: 1.15
+          go-version: 1.16
       - name: build linux version
         run: go build -o gocapture_linux -v ./...
       - name: package
@@ -54,7 +54,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v2
         with:
-          go-version: 1.15
+          go-version: 1.16
       - name: build windows version
         run: go build -v -o gocapture_windows.exe ./...
       - name: package
