@@ -1,4 +1,4 @@
-name: Release gocapture
+name: Release ztil
 on:
   push:
     tags:
@@ -16,12 +16,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
-          release_name: gocapture ${{ github.ref }}
+          release_name: ztil ${{ github.ref }}
           draft: false
           prerelease: false
 
   linuxbuild:
-    name: build gocapture
+    name: build ztil
     needs: release
     runs-on: ubuntu-latest
     steps:
@@ -33,15 +33,15 @@ jobs:
         with:
           go-version: 1.16
       - name: build linux version
-        run: go build -o gocapture_linux -v ./...
+        run: go build -o ztil -v ./...
       - name: upload
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.release.outputs.upload_url }}
-          asset_path: gocapture_linux
-          asset_name: gocapture_linux
+          asset_path: ztil
+          asset_name: ztil
           asset_content_type: application/octet-stream
 
   windowsbuild:
@@ -54,13 +54,13 @@ jobs:
         with:
           go-version: 1.16
       - name: build windows version
-        run: go build -v -o gocapture_windows.exe ./...
+        run: go build -v -o ztil.exe ./...
       - name: upload
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.release.outputs.upload_url }}
-          asset_path: gocapture_windows.exe
-          asset_name: gocapture_windows.exe
+          asset_path: ztil.exe
+          asset_name: ztil.exe
           asset_content_type: application/octet-stream
